@@ -7,18 +7,18 @@ fn main() {
 
     let secret_number = rand::thread_rng().gen_range(1..100);
 
-    println!("Secret number is: {secret_number}");
-
     loop {
         println!("Wprowadź liczbę o której myślisz");
         let mut guess = String::new();
 
         io::stdin().read_line(&mut guess).expect("Błąd odczytu");
-        let guess: u32 = match guess.trim().parse()
-            {
-                Ok(num) => num,
-                Err (_) => {println!("Miała być liczba, debilu"); continue;}
-            };
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Miała być liczba, debilu");
+                continue;
+            }
+        };
 
         println!("Wybrałeś: {guess}");
 
