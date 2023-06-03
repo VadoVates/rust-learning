@@ -2,40 +2,43 @@ use std::io;
 fn main() {
     loop {
         println!("Fibonacci n-th number");
-        println!("Którą liczbę z ciągu Fibonacciego chcesz wyliczyć? ");
+        println!("0-th number = 0");
+        println!("1-st number = 1");
+        println!("Every next number is sum of the previos two numbers");
+        println!("Which number of the Fibonacci sequence would you like to calculate");
 
-        let mut wybor: String = String::new();
-        io::stdin().read_line(&mut wybor).expect("Błąd odczytu");
+        let mut choice: String = String::new();
+        io::stdin().read_line(&mut choice).expect("Read-line error");
 
-        let wybor: u32 = match wybor.trim().parse() {
+        let choice: u32 = match choice.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Błąd parsowania do liczby! Wprowadź liczbę jeszcze raz!");
+                println!("Parsing number error (not an integer?)");
                 continue;
             }
         };
-        println!("Wynik to: {}", fibonacci(wybor));
+        println!("{choice}. number of Fibonacci sequence is: {}", fibonacci(choice));
         break;
     }
 }
 
 fn fibonacci(n: u32) -> u64 {
-    let mut suma: u64 = 0;
+    let mut sum: u64 = 0;
     let mut first: u64 = 0;
     let mut second: u64 = 1;
     match n {
-        0 => suma = first,
+        0 => sum = first,
         1 => {
-            suma = second;
+            sum = second;
         }
         _ => {
             for _i in 1..n {
-                suma = first + second;
+                sum = first + second;
                 first = second;
-                second = suma;
+                second = sum;
             }
         }
     }
 
-    suma
+    sum
 }

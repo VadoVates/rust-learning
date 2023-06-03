@@ -2,68 +2,66 @@ use std::io;
 fn main() {
     loop {
         println!("MENU");
-        println!("1 - Fahrenheit => Celsjusz");
-        println!("2 - Celsjusz => Fahrenheit");
-        println!("0 - wyjście");
-        let mut wybor: String = String::new();
-        io::stdin().read_line(&mut wybor).expect("Błąd odczytu");
+        println!("1 - Fahrenheit => Celsius");
+        println!("2 - Celsius => Fahrenheit");
+        println!("0 - Exit");
+        let mut choice: String = String::new();
+        io::stdin().read_line(&mut choice).expect("Read-line error");
 
-        let wybor: u32 = match wybor.trim().parse() {
+        let choice: u32 = match choice.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Błąd parsowania do liczby! Wprowadź liczbę jeszcze raz!");
+                println!("Parsing number error (not an unsigned integer?)");
                 continue;
             }
         };
 
-        match wybor {
+        match choice {
             1 => fahrenheit_to_celcius(),
             2 => celcius_to_fahrenheit(),
             0 => break,
-            _ => println!("Powinieneś wprowadzić inną liczbę!"),
+            _ => println!("Thou shall enter another number!"),
         }
     }
 }
 
 fn fahrenheit_to_celcius() {
-    println!("wewnątrz funkcji Fahrenheit -> Celsjusz!");
 
     loop {
         let mut fahrenheit = String::new();
-        println!("Wprowadź temperaturę fahrenheita do kowersji: ");
+        println!("Write Fahrenheit temperature to convert into Celsius: ");
         io::stdin()
             .read_line(&mut fahrenheit)
             .expect("Błąd odczytu");
         let fahrenheit: f32 = match fahrenheit.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Miałeś wprowadzić dowolną liczbę zmiennoprzecinkową!");
+                println!("Parsing numbe error (not a floating point number?)");
                 continue;
             }
         };
 
         let celsius = (fahrenheit - 32.0) * 5.0 / 9.0;
-        println!("Temperatura Celsjusza wynosi: {celsius}");
+        println!("Celsius temperature is: {celsius}");
         break;
     }
 }
 
 fn celcius_to_fahrenheit() {
-    println!("Wewnątrz funkcji Celsjusz -> Fahrenheit!");
     loop {
         let mut celsius = String::new();
-        println!("Wprowadź temperaturę fahrenheita do kowersji: ");
-        io::stdin().read_line(&mut celsius).expect("Błąd odczytu");
+        println!("Write Celsius temperature to convert: ");
+        io::stdin().read_line(&mut celsius).expect("Read-line error");
         let celsius: f32 = match celsius.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Miałeś wprowadzić dowolną liczbę zmiennoprzecinkową!");
+                println!("Parsing numbe error (not a floating point number?)");
                 continue;
             }
         };
 
         let fahrenheit = celsius * 9.0 / 5.0 + 32.0;
-        println!("Temperatura Fahrenheita wynosi: {fahrenheit}");
+        println!("Fahrenheit temperature is: {fahrenheit}");
         break;
     }
 }
